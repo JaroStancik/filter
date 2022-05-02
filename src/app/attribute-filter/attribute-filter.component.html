@@ -1,0 +1,25 @@
+<div
+  class="container"
+  #child
+  [id]="'idAttributeFilter' + this.attributeFilterId"
+>
+  <ng-select
+    class="item"
+    placeholder="Filter attributes"
+    [items]="filterOptions"
+    bindLabel="events"
+    bindValue="id"
+    [searchable]="true"
+    [clearable]="false"
+    [(ngModel)]="selectedAttribute"
+    (change)="onAttributeKeyChange($event)"
+  >
+  </ng-select>
+
+  <input
+    type="text"
+    class="item"
+    [(ngModel)]="attributeValue"
+    (input)="onAttributeValueChange($event.target.value)"
+  />
+</div>
