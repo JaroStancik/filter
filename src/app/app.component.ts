@@ -35,22 +35,6 @@ export class AppComponent {
     this.selectedEventId = id;
   }
 
-  addDynamicAttributeFilter(): void {
-    // create component factory
-    const dynamicComponentFactory =
-      this.componentFactoryResolver.resolveComponentFactory(
-        AttributeFilterComponent
-      );
-    // add component to the view
-    const componentRef = this.container.createComponent(
-      dynamicComponentFactory
-    );
-  }
-
-  removeDynamicAttributeFilter(): void {
-    this.container.clear();
-  }
-
   onMultipleFilter(): void {
     this.filterService.clearFilter();
     // set attribute filters
