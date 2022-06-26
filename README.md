@@ -3,6 +3,7 @@
 Simple filter application with filter component and pipes.
 
 ![Simple filter application](/src/filterTask.png)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.6.
 
 ## Development server
