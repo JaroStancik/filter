@@ -1,8 +1,4 @@
-<div
-  class="container"
-  #child
-  [id]="'idAttributeFilter' + this.attributeFilterId"
->
+<div class="container" [id]="'idAttributeFilter' + this.attributeFilterId">
   <ng-select
     class="item"
     placeholder="Filter attributes"
@@ -17,6 +13,7 @@
   </ng-select>
 
   <input
+    style="margin-left: 5px"
     type="text"
     class="item"
     [(ngModel)]="attributeValue"

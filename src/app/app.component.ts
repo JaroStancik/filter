@@ -1,11 +1,12 @@
 import {
   Component,
-  ComponentFactoryResolver,
   ViewChild,
   ViewContainerRef,
+  ComponentFactoryResolver,
 } from '@angular/core';
 
 import { FilterService } from './attribute-filter/filter.service';
+
 import { AttributeFilterComponent } from './attribute-filter/attribute-filter.component';
 
 @Component({
@@ -14,22 +15,30 @@ import { AttributeFilterComponent } from './attribute-filter/attribute-filter.co
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  @ViewChild('container', { read: ViewContainerRef })
-  container!: ViewContainerRef;
-
-  @ViewChild('child') child: AttributeFilterComponent;
-  @ViewChild('child1') child1: AttributeFilterComponent;
-
   selectedEventId: string;
   selectedAttributeFilter = [];
   selectedEventFilter: string;
+  componentRef: any;
 
   constructor(
     private filterService: FilterService,
     private componentFactoryResolver: ComponentFactoryResolver
   ) {}
 
+  @ViewChild('container', { read: ViewContainerRef })
+  container!: ViewContainerRef;
+
   ngOnInit(): void {}
+
+  ngAfterViewInit(): void {
+    // create component factory
+    const dynamicComponentFactory =
+      this.componentFactoryResolver.resolveComponentFactory(
+        AttributeFilterComponent
+      );
+    // add component to the view
+    this.componentRef = this.container.createComponent(dynamicComponentFactory);
+  }
 
   onSelectedEvent(id: string): void {
     this.selectedEventId = id;
@@ -37,9 +46,8 @@ export class AppComponent {
 
   onMultipleFilter(): void {
     this.filterService.clearFilter();
-    // set attribute filters
-    this.child.setAttributeFilter();
-    this.child1.setAttributeFilter();
+    // set attribute filter
+    this.componentRef.instance.setAttributeFilter();
     // set event filter
     this.selectedEventFilter = this.selectedEventId;
 
@@ -51,7 +59,7 @@ export class AppComponent {
 
   localData = [
     {
-      id: '1',
+      id: '0',
       events: 'python_script_event',
       price: '1',
       numberOfItems: '19',
@@ -61,7 +69,7 @@ export class AppComponent {
       id: '2',
       events: 'python_script_event2',
       price: '2',
-      numberOfItems: '18',
+      numberOfItems: '2',
       // timestamp: new Date(2021, 10, 10, 13, 45, 0),
     },
     {

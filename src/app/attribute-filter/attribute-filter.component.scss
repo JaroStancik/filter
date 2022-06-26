@@ -1,8 +1,10 @@
 .container {
   display: flex;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: -6px;
 }
 
 .item {
-  flex-basis: 200px;
-  margin: 5px;
+  width: 200px;
 }
